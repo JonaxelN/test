@@ -27,7 +27,7 @@ prompt APPLICATION 105 - Riesgos
 -- Application Export:
 --   Application:     105
 --   Name:            Riesgos
---   Date and Time:   10:04 Wednesday January 31, 2018
+--   Date and Time:   10:25 Wednesday January 31, 2018
 --   Exported By:     AXEL
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -112,7 +112,7 @@ wwv_flow_api.create_flow(
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'AXEL'
-,p_last_upd_yyyymmddhh24miss=>'20180131094721'
+,p_last_upd_yyyymmddhh24miss=>'20180131102212'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_ui_type_name => null
 );
@@ -50133,8 +50133,8 @@ wwv_flow_api.create_page(
 ,p_overwrite_navigation_list=>'N'
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
-,p_last_updated_by=>'AXEL'
-,p_last_upd_yyyymmddhh24miss=>'20180129192048'
+,p_last_updated_by=>'BRUNO.ROSAS@DIPUTADOS.GOB.MX'
+,p_last_upd_yyyymmddhh24miss=>'20180131101006'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(9481139897823300)
@@ -50350,7 +50350,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'CLV_RIESGO:DESC_RIESGO:DESC_MEDIDA:PERIODICIDAD:TIPO_EVIDENCIA:NRESULTADO:CUESTIONARIO:EVIDENC:NID_PROYECTO:NID_RIESGO:NID_CAUSA:NID_MEDIDA'
+,p_report_columns=>'CLV_RIESGO:DESC_RIESGO:DESC_MEDIDA:PERIODICIDAD:TIPO_EVIDENCIA:NRESULTADO:CUESTIONARIO:EVIDENC:'
 ,p_flashback_enabled=>'N'
 );
 wwv_flow_api.create_page_item(
@@ -54566,7 +54566,7 @@ wwv_flow_api.create_page(
 ,p_page_is_public_y_n=>'N'
 ,p_cache_mode=>'NOCACHE'
 ,p_last_updated_by=>'AXEL'
-,p_last_upd_yyyymmddhh24miss=>'20180130144242'
+,p_last_upd_yyyymmddhh24miss=>'20180131102212'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(9564658646361214)
@@ -54586,7 +54586,8 @@ wwv_flow_api.create_page_plug(
 'PER.CDESCRIPCION PERIODICIDAD, ',
 'TE.CDESCRIPCION TIPO_EVI, ',
 'MED.NEVENTOS, ',
-'K.CUENTA, ',
+'case when K.CUENTA is null then 0',
+'else K.CUENTA end cuenta, ',
 'J.RESULTADO PORCENTAJE,',
 'MED.NID_MEDIDA IMPRIMIR',
 'FROM MA_PROYECTO PR',
@@ -54618,6 +54619,7 @@ wwv_flow_api.create_page_plug(
 '   from ma_medida medi',
 '   left join ma_evidencia evi',
 '   on medi.nid_medida = evi.nid_medida',
+'   where evi.nid_estatus = 63',
 '   GROUP BY MEDI.NID_MEDIDA',
 ') K',
 'ON MED.NID_MEDIDA = K.MEDIDA',
