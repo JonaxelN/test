@@ -1,7 +1,8 @@
 set define off verify off feedback off
 whenever sqlerror exit sql.sqlcode rollback
 ---dato---
-
+begin
+end;
 --------------------------------------------------------------------------------
 --
 -- ORACLE Application Express (APEX) export file
